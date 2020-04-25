@@ -10,6 +10,12 @@ import fastClick from 'fastclick'
 fastClick.attach(document.body)
 // 引入字体
 import './assets/style/iconfont.css'
+// 引入轮播组件
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import style
+import 'swiper/css/swiper.css'
+Vue.use(VueAwesomeSwiper /* { default options with global component } */)
+
 Vue.config.productionTip = false
 
 new Vue({
