@@ -17,48 +17,12 @@
           </div>
         </div>
       </div>
-      <div class="area" v-for="(item, key) of cities" :key="key">
+      <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{ key }}</div>
         <div class="item-list" v-for="subitem of item" :key="subitem.id">
           <div class="item border-bottom">{{ subitem.name }}</div>
         </div>
       </div>
-      <!-- <div class="area">
-        <div class="title border-topbottom">A</div>
-        <div class="item-list">
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="title border-topbottom">B</div>
-        <div class="item-list">
-          <div class="item border-bottom">保定</div>
-          <div class="item border-bottom">保定</div>
-          <div class="item border-bottom">保定</div>
-          <div class="item border-bottom">保定</div>
-          <div class="item border-bottom">保定</div>
-          <div class="item border-bottom">保定</div>
-          <div class="item border-bottom">保定</div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="title border-topbottom">A</div>
-        <div class="item-list">
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-          <div class="item border-bottom">}阿拉善</div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -73,6 +37,9 @@ export default {
     },
     hotCities: {
       type: Array
+    },
+    letter: {
+      type: String
     }
   },
   name: 'CityList',
@@ -84,9 +51,16 @@ export default {
     // 数据获取完毕 dom更新完毕之后重新调用BScroll
     hotCities() {
       this.$nextTick(() => {
-        console.log('数据更新啦')
+        // console.log('数据更新啦')
         this.scroll = new BScroll(this.$refs.wrapper, {})
       })
+    },
+    letter() {
+      if (this.letter) {
+        // console.log(this.$refs[this.letter])
+        const element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
     }
   }
 }
