@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 var homeData = require('./public/mock/index') //请求数据的位置
+var cityData = require('./public/mock/city')
 var router = express.Router()
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -15,6 +16,9 @@ module.exports = {
     before(app) {
       router.get('/api/homeData', function(req, res) {
         res.json(homeData)
+      })
+      router.get('/api/cityData', function(req, res) {
+        res.json(cityData)
       })
       app.use(router)
     }

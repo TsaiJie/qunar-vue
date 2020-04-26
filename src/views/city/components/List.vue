@@ -7,88 +7,87 @@
           <div class="button-wrapper">
             <div class="button">北京</div>
           </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper">
-            <div class="button">北京</div>
+          <div class="button-wrapper" v-for="item of hotCities" :key="item.id">
+            <div class="button">{{ item.name }}</div>
           </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
+        </div>
+      </div>
+      <div class="area" v-for="(item, key) of cities" :key="key">
+        <div class="title border-topbottom">{{ key }}</div>
+        <div class="item-list" v-for="subitem of item" :key="subitem.id">
+          <div class="item border-bottom">{{ subitem.name }}</div>
+        </div>
+      </div>
+      <!-- <div class="area">
+        <div class="title border-topbottom">A</div>
+        <div class="item-list">
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+        </div>
+      </div>
+      <div class="area">
+        <div class="title border-topbottom">B</div>
+        <div class="item-list">
+          <div class="item border-bottom">保定</div>
+          <div class="item border-bottom">保定</div>
+          <div class="item border-bottom">保定</div>
+          <div class="item border-bottom">保定</div>
+          <div class="item border-bottom">保定</div>
+          <div class="item border-bottom">保定</div>
+          <div class="item border-bottom">保定</div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">A</div>
         <div class="item-list">
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
+          <div class="item border-bottom">}阿拉善</div>
         </div>
-        <div class="title border-topbottom">A</div>
-        <div class="item-list">
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-          <div class="item border-bottom">阿拉尔</div>
-        </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import BScroll from '@better-scroll/core'
+// import PullUp from '@better-scroll/pull-up'
 export default {
+  props: {
+    cities: {
+      type: Object
+    },
+    hotCities: {
+      type: Array
+    }
+  },
   name: 'CityList',
   mounted() {
-    this.scroll = new BScroll(this.$refs.wrapper)
+    this.scroll = new BScroll(this.$refs.wrapper, {})
+    // console.log(this.scroll)
+  },
+  watch: {
+    // 数据获取完毕 dom更新完毕之后重新调用BScroll
+    hotCities() {
+      this.$nextTick(() => {
+        console.log('数据更新啦')
+        this.scroll = new BScroll(this.$refs.wrapper, {})
+      })
+    }
   }
 }
 </script>
