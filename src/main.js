@@ -14,11 +14,14 @@ import './assets/style/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import style
 import 'swiper/css/swiper.css'
+// 引入store
+import store from './store/index'
 Vue.use(VueAwesomeSwiper /* { default options with global component } */)
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
