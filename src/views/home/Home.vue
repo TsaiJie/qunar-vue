@@ -15,6 +15,7 @@ import HomeIcons from './components/Icons.vue'
 import HomeRecommend from './components/Recommend.vue'
 import HomeWeekend from './components/Weekend.vue'
 import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   data() {
@@ -22,7 +23,8 @@ export default {
       swiperList: [],
       iconList: [],
       recommendList: [],
-      weekendList: []
+      weekendList: [],
+      lastCity: ''
     }
   },
   components: {
@@ -33,11 +35,13 @@ export default {
     HomeWeekend
   },
   mounted() {
+    console.log('mounted')
+    this.lastCity = this.city
     this.getHomeInfo()
   },
   methods: {
     getHomeInfo() {
-      axios.get('/api/homeData').then(this.getHomeInfoSucc)
+      axios.get('/api/homeData?city=' + this.city).then(this.getHomeInfoSucc)
     },
     getHomeInfoSucc(res) {
       res = res.data
@@ -50,6 +54,17 @@ export default {
       }
       console.log(res)
     }
+  },
+  computed: {
+    ...mapState(['city'])
+  },
+  // 加了keepalive 当页面激活触发这个函数
+  activated() {
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
+    console.log('activated')
   }
 }
 </script>
