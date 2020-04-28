@@ -9,7 +9,9 @@ function resolve(dir) {
 module.exports = {
   lintOnSave: true,
   chainWebpack: config => {
-    config.resolve.alias.set('style', resolve('src/assets/style'))
+    config.resolve.alias
+      .set('style', resolve('src/assets/style'))
+      .set('common', resolve('src/common'))
     // 这里只写了两个个，你可以自己再加，按这种格式.set('', resolve(''))
   },
   devServer: {
