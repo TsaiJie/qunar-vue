@@ -40,6 +40,7 @@ export default {
     }
   },
   activated() {
+    //
     window.addEventListener('scroll', this.handleScroll)
   },
   deactivated() {
