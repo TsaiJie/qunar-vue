@@ -3,7 +3,12 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+  extends: [
+    'plugin:vue/essential',
+    'eslint:recommended',
+    '@vue/prettier',
+    'eslint:recommended'
+  ],
   parserOptions: {
     parser: 'babel-eslint'
   },
@@ -16,6 +21,15 @@ module.exports = {
         semi: false,
         singleQuote: true,
         printWidth: 80
+      }
+    ],
+    'no-unused-vars': [
+      2,
+      {
+        // 允许声明未使用变量
+        vars: 'local',
+        // 参数不检查
+        args: 'none'
       }
     ]
   }
