@@ -32,7 +32,7 @@ export default {
         this.opacityStyle = {
           opacity
         }
-        console.log(opacity)
+
         this.showAbs = false
       } else {
         this.showAbs = true
@@ -41,6 +41,9 @@ export default {
   },
   activated() {
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
